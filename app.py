@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 from data import fetch_filtered_data
-from plots import plot_time_series, plot_frequency_spectrum, plot_3d_surface
+from plots import plot_time_series, plot_frequency_spectrum, plot_3d_surface, create_combined_plot
 from layout import create_layout
 
 # 使用 Bootstrap Lux 主題
@@ -29,7 +29,11 @@ app.layout = create_layout()
      Output('graph-3d-mse', 'figure'),
      Output('graph-3d-std', 'figure'),
      Output('graph-3d-peak', 'figure'),
-     Output('real-time-data-table', 'data')],
+     Output('real-time-data-table', 'data'),
+     Output('combined-xyz', 'figure'),
+     Output('combined-mse', 'figure'),
+     Output('combined-std', 'figure'),
+     Output('combined-peak', 'figure')],
     [Input('interval-component', 'n_intervals'),
      Input('date-picker-range', 'start_date'),
      Input('date-picker-range', 'end_date'),
@@ -77,13 +81,20 @@ def update_output(n_intervals, start_date, end_date, n_clicks, state_start_date,
         {"parameter": "ZOUT", "value": df_accel['ZOUT'].iloc[0] if not df_accel.empty else 'N/A'}
     ]
 
+    # 組合圖表
+    combined_xyz = create_combined_plot(df_accel, 'RECORDED_TIME', ['XOUT', 'YOUT', 'ZOUT'], 'Combined XYZ Axis Data')
+    combined_mse = create_combined_plot(df_stats, 'RECORDED_TIME', ['MSE_X', 'MSE_Y', 'MSE_Z'], 'Combined MSE Data')
+    combined_std = create_combined_plot(df_stats, 'RECORDED_TIME', ['STD_X', 'STD_Y', 'STD_Z'], 'Combined STD Data')
+    combined_peak = create_combined_plot(df_stats, 'RECORDED_TIME', ['PEAK_FREQ_X', 'PEAK_FREQ_Y', 'PEAK_FREQ_Z'], 'Combined Peak Frequency Data')
+
     return [
         time_series_x, time_series_y, time_series_z,
         mse_x, mse_y, mse_z,
         std_x, std_y, std_z,
         peak_freq_x, peak_freq_y, peak_freq_z,
         plot3d_xyz, plot3d_mse, plot3d_std, plot3d_peak,
-        real_time_data
+        real_time_data,
+        combined_xyz, combined_mse, combined_std, combined_peak
     ]
 
 if __name__ == '__main__':

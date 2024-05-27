@@ -128,23 +128,24 @@ def create_combined_plot(df, x_column, y_columns, title):
     if df.empty:
         return go.Figure()
 
-    fig = make_subplots(rows=1, cols=len(y_columns), shared_xaxes=True, subplot_titles=y_columns)
-    for i, y_column in enumerate(y_columns, 1):
+    fig = go.Figure()
+    for y_column in y_columns:
         fig.add_trace(go.Scatter(
             x=df[x_column], y=df[y_column], 
             mode='lines+markers', 
             name=y_column,
-            marker=dict(color=colors['primary'], size=5, line=dict(width=1)),
-            line=dict(color=colors['primary'], width=2)
-        ), row=1, col=i)
+            marker=dict(size=5, line=dict(width=1)),
+            line=dict(width=2)
+        ))
 
     fig.update_layout(
-        title_text=title, 
-        showlegend=False,
+        title=title,
         plot_bgcolor=colors['background'],
         paper_bgcolor=colors['background'],
         font=dict(family="Helvetica, Arial, sans-serif", size=12, color=colors['text']),
         margin=dict(l=40, r=20, t=40, b=30),
-        hovermode='closest'
+        hovermode='closest',
+        xaxis=dict(gridcolor=colors['grid']),
+        yaxis=dict(gridcolor=colors['grid'])
     )
     return fig

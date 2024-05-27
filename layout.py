@@ -81,6 +81,10 @@ def create_layout():
                         dbc.CardBody(dcc.Graph(id='graph-3d-xyz', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12,)
                 ]),
+                dbc.Row(dbc.Col(dbc.Card([
+                    dbc.CardHeader("Combined XYZ Axis Data", className="bg-secondary text-white"),
+                    dbc.CardBody(dcc.Graph(id='combined-xyz', config={'displayModeBar': False}))
+                ], className="mb-4 shadow-sm"), width=12))
             ]),
             dcc.Tab(label='MSE Data', children=[
                 dbc.Row([
@@ -101,6 +105,10 @@ def create_layout():
                         dbc.CardBody(dcc.Graph(id='graph-3d-mse', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12),
                 ]),
+                dbc.Row(dbc.Col(dbc.Card([
+                    dbc.CardHeader("Combined MSE Data", className="bg-secondary text-white"),
+                    dbc.CardBody(dcc.Graph(id='combined-mse', config={'displayModeBar': False}))
+                ], className="mb-4 shadow-sm"), width=12))
             ]),
             dcc.Tab(label='STD Data', children=[
                 dbc.Row([
@@ -121,6 +129,10 @@ def create_layout():
                         dbc.CardBody(dcc.Graph(id='graph-3d-std', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12),
                 ]),
+                dbc.Row(dbc.Col(dbc.Card([
+                    dbc.CardHeader("Combined STD Data", className="bg-secondary text-white"),
+                    dbc.CardBody(dcc.Graph(id='combined-std', config={'displayModeBar': False}))
+                ], className="mb-4 shadow-sm"), width=12))
             ]),
             dcc.Tab(label='Peak Frequency Data', children=[
                 dbc.Row([
@@ -141,6 +153,10 @@ def create_layout():
                         dbc.CardBody(dcc.Graph(id='graph-3d-peak', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12),
                 ]),
+                dbc.Row(dbc.Col(dbc.Card([
+                    dbc.CardHeader("Combined Peak Frequency Data", className="bg-secondary text-white"),
+                    dbc.CardBody(dcc.Graph(id='combined-peak', config={'displayModeBar': False}))
+                ], className="mb-4 shadow-sm"), width=12))
             ]),
             dcc.Tab(label='Real-time Data', children=[
                 dbc.Row([
