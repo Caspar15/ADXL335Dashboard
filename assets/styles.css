@@ -1,20 +1,35 @@
+/* Custom background and font */
 body {
-    background-color: #f8f9fa;
-}
-
-h1 {
-    font-size: 2.5rem;
+    background: linear-gradient(120deg, #f6f6f6, #e9ecef);
+    font-family: 'Roboto', sans-serif;
     color: #343a40;
 }
 
+/* Header style */
+h1 {
+    font-size: 2.5rem;
+    color: #343a40;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Card styles */
 .card {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
 }
 
 .card-header {
     background-color: #343a40;
     color: #fff;
+    font-weight: bold;
+    text-align: center;
 }
 
 .btn-primary {
@@ -22,15 +37,117 @@ h1 {
     border-color: #007bff;
 }
 
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Navbar style */
 .navbar {
     margin-bottom: 1rem;
+    background-color: #343a40;
 }
 
 .navbar-brand {
     font-size: 1.5rem;
     font-weight: bold;
+    color: #fff !important;
+}
+
+.nav-link-icon {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link-icon::before {
+    content: '🔗';
+    margin-right: 5px;
 }
 
 .shadow-sm {
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+/* DataTable styles */
+.dash-table-container {
+    border: none !important;
+}
+
+.dash-table th {
+    background-color: #343a40 !important;
+    color: #fff !important;
+}
+
+.dash-table td {
+    color: #343a40 !important;
+}
+
+.dash-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+/* Custom tooltip style */
+.tooltip {
+    background-color: #343a40 !important;
+    color: #fff !important;
+    border-radius: 4px !important;
+    padding: 5px !important;
+}
+
+/* Custom graph style */
+.graph-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 1rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.alarm {
+    font-size: 1.2rem;
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    background: #ffdddd;
+    padding: 10px;
+    border: 1px solid #ff5c5c;
+    border-radius: 5px;
+    box-shadow: 0 0.125rem 0.25rem rgba(255, 0, 0, 0.2);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Footer style */
+.footer {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+    border-top: 1px solid #ced4da;
 }

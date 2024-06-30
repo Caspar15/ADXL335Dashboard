@@ -5,7 +5,7 @@ from scipy.fft import fft, fftfreq
 from scipy.interpolate import griddata
 import pandas as pd
 
-# 自定義顏色和樣式
+# 顏色和樣式
 colors = {
     'background': '#f9f9f9',
     'text': '#2c3e50',
@@ -29,7 +29,7 @@ def plot_frequency_spectrum(df, x_column, y_column, title, plot_type='bars'):
     yf = fft(signal)
     xf = fftfreq(N, 1 / sampling_rate)
     
-    # 考慮正頻率的部分，xf > 0。
+    # 只考慮正頻率的部分，xf > 0
     mask = xf >= 0
     xf = xf[mask]
     yf = yf[mask]
@@ -87,27 +87,26 @@ def plot_time_series(df, x_column, y_column, title):
     return fig
 
 def plot_3d_surface(df, x_column, y_column, z_column, title):
-    if df.empty:
-        print(f"Missing data for 3D surface plot: {title}")
-        return go.Figure()
+    if df.empty or df.shape[0] < 4:
+        print(f"Insufficient data for 3D surface plot: {title}")
+        return go.Figure(layout={'title': f'{title} (Insufficient data)'})
 
-    x = df[x_column]
-    y = df[y_column]
-    z = df[z_column]
-    xi = np.linspace(x.min(), x.max(), 100)
-    yi = np.linspace(y.min(), y.max(), 100)
+    x = df[x_column].values
+    y = df[y_column].values
+    z = df[z_column].values
+
+    # Grid and interpolate data
+    xi = np.linspace(min(x), max(x), 100)
+    yi = np.linspace(min(y), max(y), 100)
     xi, yi = np.meshgrid(xi, yi)
-    zi = griddata((x, y), z, (xi, yi), method='cubic')
 
-    fig = go.Figure()
-    fig.add_trace(go.Surface(
-        x=xi, y=yi, z=zi,
-        colorscale='Viridis',
-        colorbar=dict(title='Z value'),
-        contours=dict(
-            z=dict(show=True, usecolormap=True, highlightcolor="limegreen", project=dict(z=True))
-        )
-    ))
+    try:
+        zi = griddata((x, y), z, (xi, yi), method='cubic')
+    except Exception as e:
+        print(f"Error in griddata interpolation: {e}")
+        return go.Figure(layout={'title': f'{title} (Interpolation error)'})
+
+    fig = go.Figure(data=[go.Surface(x=xi, y=yi, z=zi, colorscale='Viridis')])
     fig.update_layout(
         title=title,
         scene=dict(
@@ -128,24 +127,23 @@ def create_combined_plot(df, x_column, y_columns, title):
     if df.empty:
         return go.Figure()
 
-    fig = go.Figure()
-    for y_column in y_columns:
+    fig = make_subplots(rows=len(y_columns), cols=1, shared_xaxes=True, subplot_titles=y_columns)
+    for i, y_column in enumerate(y_columns, 1):
         fig.add_trace(go.Scatter(
             x=df[x_column], y=df[y_column], 
             mode='lines+markers', 
             name=y_column,
-            marker=dict(size=5, line=dict(width=1)),
-            line=dict(width=2)
-        ))
+            marker=dict(color=colors['primary'], size=5, line=dict(width=1)),
+            line=dict(color=colors['primary'], width=2)
+        ), row=i, col=1)
 
     fig.update_layout(
-        title=title,
+        title_text=title, 
+        showlegend=False,
         plot_bgcolor=colors['background'],
         paper_bgcolor=colors['background'],
         font=dict(family="Helvetica, Arial, sans-serif", size=12, color=colors['text']),
         margin=dict(l=40, r=20, t=40, b=30),
-        hovermode='closest',
-        xaxis=dict(gridcolor=colors['grid']),
-        yaxis=dict(gridcolor=colors['grid'])
+        hovermode='closest'
     )
     return fig

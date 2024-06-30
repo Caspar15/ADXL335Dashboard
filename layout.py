@@ -1,6 +1,7 @@
 import dash_bootstrap_components as dbc
-from dash import dcc, html, dash_table
+from dash import dcc, html
 from datetime import date
+from dash import dash_table
 
 def create_layout():
     navbar = dbc.Navbar(
@@ -11,7 +12,8 @@ def create_layout():
                 dbc.Collapse(
                     dbc.Nav(
                         [
-                            dbc.NavItem(dbc.NavLink("主頁", href="#")),
+                            dbc.NavItem(dbc.NavLink("主頁", href="#", className="nav-link-icon", external_link=True)),
+                            dbc.NavItem(dbc.NavLink("實時數據", href="#realtime", className="nav-link-icon", external_link=True)),
                             dbc.DropdownMenu(
                                 [
                                     dbc.DropdownMenuItem("更多資訊", header=True),
@@ -41,8 +43,8 @@ def create_layout():
         start_date=date.today(),
         end_date=date.today(),
         display_format='YYYY-MM-DD',
-        start_date_placeholder_text='Start Date',
-        end_date_placeholder_text='End Date',
+        start_date_placeholder_text='開始日期',
+        end_date_placeholder_text='結束日期',
         minimum_nights=0,
         className="mb-3"
     )
@@ -52,7 +54,7 @@ def create_layout():
         dbc.Row([
             dbc.Col([
                 date_picker,
-                html.Button('Submit', id='submit-val', n_clicks=0, className="btn btn-primary mb-3"),
+                html.Button('提交', id='submit-val', n_clicks=0, className="btn btn-primary mb-3"),
             ], width=12, className="d-flex justify-content-center")
         ]),
         dcc.Interval(
@@ -60,127 +62,157 @@ def create_layout():
             interval=60000,  # 60 seconds
             n_intervals=0
         ),
-        dbc.Row(dbc.Col(html.H1("Sensor Data Monitoring", className="text-center text-primary mb-4"), width=12)),
+        dbc.Row(dbc.Col(html.H1("感測器數據監控", className="text-center text-primary mb-4"), width=12)),
         dcc.Tabs(id="tabs", children=[
-            dcc.Tab(label='XYZ Axis Data', children=[
+            dcc.Tab(label='XYZ 輔數據', children=[
                 dbc.Row([
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("X Axis Data", className="bg-primary text-white"),
+                        dbc.CardHeader("X 軸數據", className="bg-dark text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Y Axis Data", className="bg-success text-white"),
+                        dbc.CardHeader("Y 軸數據", className="bg-success text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Z Axis Data", className="bg-info text-white"),
+                        dbc.CardHeader("Z 軸數據", className="bg-info text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D XYZ Axis Data", className="bg-dark text-white"),
+                        dbc.CardHeader("3D XYZ 軸數據", className="bg-dark text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-3d-xyz', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12,)
                 ]),
-                dbc.Row(dbc.Col(dbc.Card([
-                    dbc.CardHeader("Combined XYZ Axis Data", className="bg-secondary text-white"),
-                    dbc.CardBody(dcc.Graph(id='combined-xyz', config={'displayModeBar': False}))
-                ], className="mb-4 shadow-sm"), width=12))
             ]),
-            dcc.Tab(label='MSE Data', children=[
+            dcc.Tab(label='MSE 數據', children=[
                 dbc.Row([
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Mean Squared Error X", className="bg-warning text-dark"),
+                        dbc.CardHeader("Mean Squared Error X", className="bg-warning text-dark text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-mse-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Mean Squared Error Y", className="bg-danger text-white"),
+                        dbc.CardHeader("Mean Squared Error Y", className="bg-danger text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-mse-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Mean Squared Error Z", className="bg-secondary text-white"),
+                        dbc.CardHeader("Mean Squared Error Z", className="bg-info text-dark text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-mse-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D MSE Data", className="bg-dark text-white"),
+                        dbc.CardHeader("3D MSE 數據", className="bg-dark text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-3d-mse', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12),
                 ]),
-                dbc.Row(dbc.Col(dbc.Card([
-                    dbc.CardHeader("Combined MSE Data", className="bg-secondary text-white"),
-                    dbc.CardBody(dcc.Graph(id='combined-mse', config={'displayModeBar': False}))
-                ], className="mb-4 shadow-sm"), width=12))
             ]),
-            dcc.Tab(label='STD Data', children=[
+            dcc.Tab(label='STD 數據', children=[
                 dbc.Row([
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Standard Deviation X", className="bg-dark text-white"),
+                        dbc.CardHeader("Standard Deviation X", className="bg-dark text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-std-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Standard Deviation Y", className="bg-primary text-white"),
+                        dbc.CardHeader("Standard Deviation Y", className="bg-primary text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-std-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Standard Deviation Z", className="bg-success text-white"),
+                        dbc.CardHeader("Standard Deviation Z", className="bg-success text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-std-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D STD Data", className="bg-dark text-white"),
+                        dbc.CardHeader("3D STD 數據", className="bg-dark text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-3d-std', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12),
                 ]),
-                dbc.Row(dbc.Col(dbc.Card([
-                    dbc.CardHeader("Combined STD Data", className="bg-secondary text-white"),
-                    dbc.CardBody(dcc.Graph(id='combined-std', config={'displayModeBar': False}))
-                ], className="mb-4 shadow-sm"), width=12))
             ]),
-            dcc.Tab(label='Peak Frequency Data', children=[
+            dcc.Tab(label='峰值頻率數據', children=[
                 dbc.Row([
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Peak Frequency X", className="bg-info text-white"),
+                        dbc.CardHeader("Peak Frequency X", className="bg-info text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-peak-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Peak Frequency Y", className="bg-warning text-dark"),
+                        dbc.CardHeader("Peak Frequency Y", className="bg-warning text-dark text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-peak-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Peak Frequency Z", className="bg-danger text-white"),
+                        dbc.CardHeader("Peak Frequency Z", className="bg-danger text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-peak-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D Peak Frequency Data", className="bg-dark text-white"),
+                        dbc.CardHeader("3D Peak Frequency 數據", className="bg-dark text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-3d-peak', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12),
                 ]),
-                dbc.Row(dbc.Col(dbc.Card([
-                    dbc.CardHeader("Combined Peak Frequency Data", className="bg-secondary text-white"),
-                    dbc.CardBody(dcc.Graph(id='combined-peak', config={'displayModeBar': False}))
-                ], className="mb-4 shadow-sm"), width=12))
             ]),
-            dcc.Tab(label='Real-time Data', children=[
+            dcc.Tab(label='實時數據', children=[
                 dbc.Row([
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Real-time Data", className="bg-primary text-white"),
-                        dbc.CardBody(dash_table.DataTable(
-                            id='real-time-data-table',
-                            columns=[
-                                {"name": "Parameter", "id": "parameter"},
-                                {"name": "Value", "id": "value"},
-                            ],
-                            data=[],
-                            style_table={'height': '300px', 'overflowY': 'auto'},
-                            style_cell={'textAlign': 'left'},
-                        ))
+                        dbc.CardHeader("實時數據", className="bg-primary text-white text-center"),
+                        dbc.CardBody([
+                            dash_table.DataTable(
+                                id='real-time-data-table',
+                                columns=[
+                                    {"name": "Parameter", "id": "parameter"},
+                                    {"name": "Value", "id": "value"},
+                                ],
+                                data=[],
+                                style_table={'height': '300px', 'overflowY': 'auto'},
+                                style_cell={'textAlign': 'left'},
+                            ),
+                            html.Div(id='alarm-output', className='alarm text-center mt-3', style={'display': 'none'})  # 初始設置為隱藏, alarm 的部分，無超過範圍就隱藏
+                        ])
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                 ]),
+            ]),
+            dcc.Tab(label='周數比較', children=[
+                dbc.Row([
+                    dbc.Col([
+                        dcc.Dropdown(
+                            id='week-comparison-dropdown',
+                            options=[],
+                            multi=True,
+                            placeholder="選擇要比較的周數"
+                        ),
+                    ], width=12, className="mb-4")
+                ]),
+                dbc.Row([
+                    dbc.Col([
+                        dcc.Dropdown(
+                            id='data-type-dropdown',
+                            options=[
+                                {'label': 'XOUT', 'value': 'XOUT'},
+                                {'label': 'YOUT', 'value': 'YOUT'},
+                                {'label': 'ZOUT', 'value': 'ZOUT'},
+                                {'label': 'MSE_X', 'value': 'MSE_X'},
+                                {'label': 'MSE_Y', 'value': 'MSE_Y'},
+                                {'label': 'MSE_Z', 'value': 'MSE_Z'},
+                                {'label': 'STD_X', 'value': 'STD_X'},
+                                {'label': 'STD_Y', 'value': 'STD_Y'},
+                                {'label': 'STD_Z', 'value': 'STD_Z'},
+                                {'label': 'PEAK_FREQ_X', 'value': 'PEAK_FREQ_X'},
+                                {'label': 'PEAK_FREQ_Y', 'value': 'PEAK_FREQ_Y'},
+                                {'label': 'PEAK_FREQ_Z', 'value': 'PEAK_FREQ_Z'}
+                            ],
+                            placeholder="選擇要比較的數據類型",
+                            className="mb-4"
+                        )
+                    ], width=12)
+                ]),
+                dbc.Row([
+                    dbc.Col([
+                        html.Div(id='combined-plot', className="mb-4")
+                    ], width=12)
+                ])
             ]),
         ]),
         dcc.Interval(
             id='interval-component',
-            interval=60000, # 將刷新間隔調整為60秒
+            interval=60000, # 將刷新間隔調整為60秒，避免網頁附載過大
             n_intervals=0
-        )
+        ),
+        html.Footer([
+            html.Div("機械故障診斷與遇診功能研究。", className="text-center text-muted"),
+        ], className="footer mt-5 pt-3 pb-3")
     ], fluid=True)
     
     return layout

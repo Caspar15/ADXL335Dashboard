@@ -21,10 +21,13 @@ def fetch_data(query):
 
 def fetch_filtered_data(start_date, end_date, table_name):
     query = f"SELECT * FROM {table_name} WHERE RECORDED_TIME BETWEEN '{start_date}' AND '{end_date}' ORDER BY RECORDED_TIME DESC"
-    return fetch_data(query)
+    df = fetch_data(query)
+    if df.empty:
+        print(f"No data fetched for table: {table_name} between {start_date} and {end_date}")
+    else:
+        print(f"Fetched data for table: {table_name} between {start_date} and {end_date}")
+        print(df.head())
+    return df
 
-def fetch_accel_data(limit=50):
-    return fetch_data(f"SELECT * FROM AccelerometerData ORDER BY RECORDED_TIME DESC LIMIT {limit}")
-
-def fetch_stats_data(limit=50):
-    return fetch_data(f"SELECT * FROM StatisticsData ORDER BY RECORDED_TIME DESC LIMIT {limit}")
+def clear_cache():
+    cache.clear()
