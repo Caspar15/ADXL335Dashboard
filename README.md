@@ -112,4 +112,3 @@ Contributions are welcome! Please open an issue or submit a pull request with yo
 ## 📧 Contact
 
 For questions or feedback, please contact [Caspar15](mailto:caspar9202166422@gmail.com).
-```
