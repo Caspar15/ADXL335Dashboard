@@ -1,4 +1,18 @@
-当然，这里是你提供的内容的Markdown语法：
+# Sensor Data Monitoring Dashboard
+
+## Overview
+
+This project is a comprehensive Sensor Data Monitoring Dashboard built using Dash and Plotly. The dashboard visualizes various sensor data including XYZ axis data, Mean Squared Error (MSE), Standard Deviation (STD), and Peak Frequency data. It also includes real-time data monitoring and alarm functionality for out-of-range sensor values.
+
+## Features
+
+- **XYZ Axis Data Visualization:** Displays time series data for X, Y, and Z axis.
+- **Mean Squared Error (MSE) Visualization:** Shows MSE data for X, Y, and Z axis.
+- **Standard Deviation (STD) Visualization:** Visualizes the standard deviation of X, Y, and Z axis data.
+- **Peak Frequency Data Visualization:** Plots the peak frequency data using bar charts.
+- **3D Surface Plots:** Provides 3D surface plots for XYZ axis, MSE, STD, and Peak Frequency data.
+- **Real-Time Data Monitoring:** Displays real-time sensor data and triggers alarms if values are out-of-range.
+- **Week Comparison Feature:** Allows users to compare data from different weeks side-by-side.
 
 ```markdown
 # 📊 Sensor Data Monitoring Dashboard
