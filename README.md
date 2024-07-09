@@ -1,33 +1,47 @@
-Sensor Data Monitoring Dashboard
-Overview
-This project is a comprehensive Sensor Data Monitoring Dashboard built using Dash and Plotly. The dashboard visualizes various sensor data including XYZ axis data, Mean Squared Error (MSE), Standard Deviation (STD), and Peak Frequency data. It also includes real-time data monitoring and alarm functionality for out-of-range sensor values.
+# 📊 Sensor Data Monitoring Dashboard
 
-Features
-XYZ Axis Data Visualization: Displays time series data for X, Y, and Z axis.
-Mean Squared Error (MSE) Visualization: Shows MSE data for X, Y, and Z axis.
-Standard Deviation (STD) Visualization: Visualizes the standard deviation of X, Y, and Z axis data.
-Peak Frequency Data Visualization: Plots the peak frequency data using bar charts.
-3D Surface Plots: Provides 3D surface plots for XYZ axis, MSE, STD, and Peak Frequency data.
-Real-Time Data Monitoring: Displays real-time sensor data and triggers alarms if values are out-of-range.
-Week Comparison Feature: Allows users to compare data from different weeks side-by-side.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![Dash](https://img.shields.io/badge/dash-2.0.0%2B-brightgreen)
 
-Installation
-Clone the repository:
-git clone https://github.com/yourusername/sensor-data-monitoring.git
-cd sensor-data-monitoring
-Create and activate a virtual environment:
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-Install the required packages:
-pip install -r requirements.txt
+## Overview
 
-Usage
-Start the application:
-python app.py
-Access the dashboard:
-Open your web browser and go to http://127.0.0.1:8050/ to view the dashboard.
+The **Sensor Data Monitoring Dashboard** is a comprehensive visualization tool built using Dash and Plotly. It provides real-time monitoring, visualization of various sensor data including XYZ axis data, Mean Squared Error (MSE), Standard Deviation (STD), and Peak Frequency data, along with an alarm functionality for out-of-range sensor values.
 
-Directory Structure
+## Features
+
+- **XYZ Axis Data Visualization**
+- **Mean Squared Error (MSE) Visualization**
+- **Standard Deviation (STD) Visualization**
+- **Peak Frequency Data Visualization**
+- **3D Surface Plots**
+- **Real-Time Data Monitoring**
+- **Alarm Functionality**
+- **Week Comparison Feature**
+
+## 🛠️ Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/sensor-data-monitoring.git
+   cd sensor-data-monitoring
+
+2. **Create and activate a virtual environment:**
+
+  python -m venv venv
+  source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+3. **Install the required packages:**
+  pip install -r requirements.txt
+
+🚀 Usage
+1. **Start the application:**
+  python app.py
+2. **Access the dashboard:**
+  Open your web browser and go to http://127.0.0.1:8050/ to view the dashboard.
+
+📁 Directory Structure
 sensor-data-monitoring/
 │
 ├── app.py                    # Main application file
@@ -39,7 +53,7 @@ sensor-data-monitoring/
 │   └── style.css             # Custom CSS for styling
 └── README.md                 # Project documentation
 
-Dependencies
+📦 Dependencies
 Dash
 Dash Bootstrap Components
 Plotly
@@ -49,7 +63,8 @@ SciPy
 SQLAlchemy
 Cachetools
 MySQL Connector
-Data Source
+
+📊 Data Source
 The application fetches sensor data from a MySQL database. The database schema should include tables for AccelerometerData and StatisticsData with the following structure:
 
 AccelerometerData
@@ -70,16 +85,17 @@ STD_Z	FLOAT
 PEAK_FREQ_X	FLOAT
 PEAK_FREQ_Y	FLOAT
 PEAK_FREQ_Z	FLOAT
-
-Customization
+✨ Customization
 Styling: Modify the static/style.css file to change the appearance of the dashboard.
 Data Fetching: Update data.py to modify the data fetching logic or to connect to a different database.
-
-Contributing
+🤝 Contributing
 Contributions are welcome! Please open an issue or submit a pull request with your changes.
 
-Acknowledgements
+📄 License
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+💬 Acknowledgements
 Thanks to the Dash and Plotly teams for their excellent libraries.
 Inspiration for this project came from various online resources and tutorials.
-Contact
+📧 Contact
 For questions or feedback, please contact yourname.
