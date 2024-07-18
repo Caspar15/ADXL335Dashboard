@@ -9,7 +9,7 @@ from plots import plot_time_series, plot_frequency_spectrum, plot_3d_surface, cr
 from layout import create_layout
 from dash import dcc, html
 
-# 使用 Bootstrap Lux 主題
+# 初始化应用
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX])
 server = app.server
 
@@ -72,7 +72,7 @@ def update_output(n_intervals, start_date, end_date, n_clicks, state_start_date,
     # 使用直條圖繪製峰值頻率數據
     peak_freq_x = plot_frequency_spectrum(df_stats, 'RECORDED_TIME', 'PEAK_FREQ_X', 'Peak Frequency for X', 'bars')
     peak_freq_y = plot_frequency_spectrum(df_stats, 'RECORDED_TIME', 'PEAK_FREQ_Y', 'Peak Frequency for Y', 'bars')
-    peak_freq_z = plot_frequency_spectrum(df_stats, 'RECORDED_TIME', 'PEAK_FREQ_Z', 'Peak Frequency for Z', 'bars')
+    peak_freq_z = plot_frequency_spectrum(df_stats, 'RECORDED_TIME', 'PEAK_FREQ_Z', 'bars')
 
     # 繪製3D圖表
     plot3d_xyz = plot_3d_surface(df_accel, 'XOUT', 'YOUT', 'ZOUT', '3D Scatter Plot for XYZ Axis')
@@ -162,6 +162,25 @@ def update_combined_plot(selected_weeks, selected_data_type, start_date, end_dat
         plots.append(dcc.Graph(figure=plot))
 
     return plots
+
+@app.callback(
+    Output('theme', 'children'),
+    [Input('dark-theme-button', 'n_clicks'),
+     Input('light-theme-button', 'n_clicks')]
+)
+def switch_theme(dark_clicks, light_clicks):
+    ctx = dash.callback_context
+
+    if not ctx.triggered:
+        theme = dbc.themes.LUX
+    else:
+        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+        if button_id == 'dark-theme-button':
+            theme = dbc.themes.SLATE
+        else:
+            theme = dbc.themes.LUX
+
+    return [html.Link(href=theme, rel='stylesheet')]
 
 if __name__ == '__main__':
     app.run_server(debug=True)
