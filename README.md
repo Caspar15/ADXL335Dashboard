@@ -14,7 +14,6 @@ This project is a comprehensive Sensor Data Monitoring Dashboard built using Das
 - **Real-Time Data Monitoring:** Displays real-time sensor data and triggers alarms if values are out-of-range.
 - **Week Comparison Feature:** Allows users to compare data from different weeks side-by-side.
 
-```markdown
 # 📊 Sensor Data Monitoring Dashboard
 
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
