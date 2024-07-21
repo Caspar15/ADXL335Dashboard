@@ -18,11 +18,12 @@ h1 {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
 .card-header {
@@ -150,4 +151,63 @@ h1 {
     font-size: 0.9rem;
     color: #6c757d;
     border-top: 1px solid #ced4da;
+}
+
+/* Tabs style */
+.dash-tabs {
+    border-bottom: 1px solid #ced4da;
+    margin-bottom: 1rem;
+}
+
+.dash-tab {
+    background-color: #fff;
+    color: #343a40;
+    border: 1px solid #ced4da;
+    border-bottom: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dash-tab:hover {
+    background-color: #e9ecef;
+}
+
+.dash-tab-selected {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+}
+
+/* Improved card styles */
+.card-body {
+    padding: 1rem;
+}
+
+.card-title {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    color: #007bff;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+/* Improved button styles */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.btn:focus, .btn:active {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }

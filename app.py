@@ -9,7 +9,7 @@ from plots import plot_time_series, plot_frequency_spectrum, plot_3d_surface, cr
 from layout import create_layout
 from dash import dcc, html
 
-# 初始化应用
+# 初始化應用
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX])
 server = app.server
 

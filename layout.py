@@ -18,12 +18,19 @@ def create_layout():
                                     dbc.DropdownMenuItem("更多資訊", header=True),
                                     dbc.DropdownMenuItem("官方文檔", href="https://plotly.com/dash/"),
                                     dbc.DropdownMenuItem("其他項目", href="#"),
-                                    dbc.DropdownMenuItem("深色主題", id="dark-theme-button"),
-                                    dbc.DropdownMenuItem("淺色主題", id="light-theme-button")
                                 ],
                                 nav=True,
                                 in_navbar=True,
                                 label="探索",
+                            ),
+                            dbc.DropdownMenu(
+                                [
+                                    dbc.DropdownMenuItem("深色主題", id="dark-theme-button"),
+                                    dbc.DropdownMenuItem("淺色主題", id="light-theme-button"),
+                                ],
+                                nav=True,
+                                in_navbar=True,
+                                label="主題切換",
                             ),
                         ],
                         className="ml-auto",
@@ -65,7 +72,7 @@ def create_layout():
         ),
         dbc.Row(dbc.Col(html.H1("感測器數據監控", className="text-center text-primary mb-4"), width=12)),
         dcc.Tabs(id="tabs", children=[
-            dcc.Tab(label='XYZ 輔數據', children=[
+            dcc.Tab(label='XYZ 數據', children=[
                 dbc.Row([
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("X 軸數據", className="bg-dark text-white text-center"),
@@ -82,7 +89,7 @@ def create_layout():
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("3D XYZ 軸數據", className="bg-dark text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-3d-xyz', config={'displayModeBar': False}))
-                    ], className="mb-4 shadow-sm"), width=12,)
+                    ], className="mb-4 shadow-sm"), width=12)
                 ]),
             ]),
             dcc.Tab(label='MSE 數據', children=[
@@ -100,9 +107,9 @@ def create_layout():
                         dbc.CardBody(dcc.Graph(id='graph-mse-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D MSE 數據", className="bg-dark text白色 text-center"),
+                        dbc.CardHeader("3D MSE 數據", className="bg-dark text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-3d-mse', config={'displayModeBar': False}))
-                    ], className="mb-4 shadow-sm"), width=12),
+                    ], className="mb-4 shadow-sm"), width=12)
                 ]),
             ]),
             dcc.Tab(label='STD 數據', children=[
@@ -112,17 +119,17 @@ def create_layout():
                         dbc.CardBody(dcc.Graph(id='graph-std-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Standard Deviation Y", className="bg-primary text白色 text-center"),
+                        dbc.CardHeader("Standard Deviation Y", className="bg-primary text-white text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-std-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Standard Deviation Z", className="bg-success text-white text-center"),
+                        dbc.CardHeader("Standard Deviation Z", className="bg-success text白色 text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-std-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("3D STD 數據", className="bg-dark text白色 text-center"),
                         dbc.CardBody(dcc.Graph(id='graph-3d-std', config={'displayModeBar': False}))
-                    ], className="mb-4 shadow-sm"), width=12),
+                    ], className="mb-4 shadow-sm"), width=12)
                 ]),
             ]),
             dcc.Tab(label='峰值頻率數據', children=[
@@ -132,23 +139,23 @@ def create_layout():
                         dbc.CardBody(dcc.Graph(id='graph-peak-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Peak Frequency Y", className="bg-warning text-dark text-center"),
+                        dbc.CardHeader("Peak Frequency Y", className="bg-warning text-dark text中心"),
                         dbc.CardBody(dcc.Graph(id='graph-peak-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("Peak Frequency Z", className="bg-danger text白色 text-center"),
+                        dbc.CardHeader("Peak Frequency Z", className="bg-danger text白色 text中心"),
                         dbc.CardBody(dcc.Graph(id='graph-peak-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D Peak Frequency 數據", className="bg-dark text白色 text-center"),
+                        dbc.CardHeader("3D Peak Frequency 數據", className="bg-dark text白色 text中心"),
                         dbc.CardBody(dcc.Graph(id='graph-3d-peak', config={'displayModeBar': False}))
-                    ], className="mb-4 shadow-sm"), width=12),
+                    ], className="mb-4 shadow-sm"), width=12)
                 ]),
             ]),
             dcc.Tab(label='實時數據', children=[
                 dbc.Row([
                     dbc.Col(dbc.Card([
-                        dbc.CardHeader("實時數據", className="bg-primary text白色 text-center"),
+                        dbc.CardHeader("實時數據", className="bg-primary text白色 text中心"),
                         dbc.CardBody([
                             dash_table.DataTable(
                                 id='real-time-data-table',
@@ -160,9 +167,9 @@ def create_layout():
                                 style_table={'height': '300px', 'overflowY': 'auto'},
                                 style_cell={'textAlign': 'left'},
                             ),
-                            html.Div(id='alarm-output', className='alarm text-center mt-3', style={'display': 'none'})  # 初始設置為隱藏, alarm 的部分，無超過範圍就隱藏
+                            html.Div(id='alarm-output', className='alarm text中心 mt-3', style={'display': 'none'})  # 初始設置為隱藏
                         ])
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
+                    ], className="mb-4 shadow-sm"), width=12, lg=4)
                 ]),
             ]),
             dcc.Tab(label='周數比較', children=[
@@ -173,7 +180,7 @@ def create_layout():
                             options=[],
                             multi=True,
                             placeholder="選擇要比較的周數"
-                        ),
+                        )
                     ], width=12, className="mb-4")
                 ]),
                 dbc.Row([
@@ -204,11 +211,11 @@ def create_layout():
                         html.Div(id='combined-plot', className="mb-4")
                     ], width=12)
                 ])
-            ]),
+            ])
         ]),
         dcc.Interval(
             id='interval-component',
-            interval=60000, # 將刷新間隔調整為60秒，避免網頁附載過大
+            interval=60000,  # 60 seconds
             n_intervals=0
         ),
         html.Footer([
