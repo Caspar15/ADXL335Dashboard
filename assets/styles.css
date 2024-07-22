@@ -33,6 +33,15 @@ h1 {
     text-align: center;
 }
 
+/* Button styles */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -41,6 +50,21 @@ h1 {
 .btn-primary:hover {
     background-color: #0056b3;
     border-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.btn:focus, .btn:active {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
 
 /* Navbar style */
@@ -194,20 +218,20 @@ h1 {
     color: #6c757d;
 }
 
-/* Improved button styles */
-.btn {
+/* Link button styles */
+#download-link {
+    display: inline-block;
     padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
     font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 0.25rem;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn:hover {
+#download-link:hover {
+    background-color: #0056b3;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
-
-.btn:focus, .btn:active {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }

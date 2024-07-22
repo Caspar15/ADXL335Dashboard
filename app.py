@@ -8,6 +8,9 @@ from data import fetch_filtered_data, clear_cache
 from plots import plot_time_series, plot_frequency_spectrum, plot_3d_surface, create_combined_plot
 from layout import create_layout
 from dash import dcc, html
+import urllib.parse
+import base64
+import flask
 
 # 初始化應用
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX])
@@ -116,7 +119,6 @@ def update_output(n_intervals, start_date, end_date, n_clicks, state_start_date,
     [State('date-picker-range', 'start_date'),
      State('date-picker-range', 'end_date')]
 )
-
 def update_week_options(n_clicks, start_date, end_date):
     clear_cache()  # 清除緩存
     df_accel = fetch_filtered_data(start_date, end_date, 'AccelerometerData')
@@ -139,7 +141,6 @@ def update_week_options(n_clicks, start_date, end_date):
     [State('date-picker-range', 'start_date'),
      State('date-picker-range', 'end_date')]
 )
-
 def update_combined_plot(selected_weeks, selected_data_type, start_date, end_date):
     clear_cache()  # 清除緩存
     if not selected_weeks or not selected_data_type:
@@ -181,6 +182,35 @@ def switch_theme(dark_clicks, light_clicks):
             theme = dbc.themes.LUX
 
     return [html.Link(href=theme, rel='stylesheet')]
+
+@app.callback(
+    Output('download-link', 'href'),
+    [Input('export-data', 'n_clicks')],
+    [State('date-picker-range', 'start_date'), 
+     State('date-picker-range', 'end_date')]
+)
+def update_download_link(n_clicks, start_date, end_date):
+    if n_clicks is None or start_date is None or end_date is None:
+        return dash.no_update
+    
+    df = fetch_filtered_data(start_date, end_date, 'AccelerometerData')
+    if df.empty:
+        return dash.no_update
+
+    csv_string = df.to_csv(index=False, encoding='utf-8')
+    b64 = base64.b64encode(csv_string.encode()).decode()
+    
+    return f"/downloadCSV?data={b64}"
+
+@app.server.route('/downloadCSV')
+def download_csv():
+    data = flask.request.args.get('data')
+    csv_string = base64.b64decode(data).decode('utf-8')
+    return flask.Response(
+        csv_string,
+        mimetype="text/csv",
+        headers={"Content-disposition": "attachment; filename=sensor_data.csv"}
+    )
 
 if __name__ == '__main__':
     app.run_server(debug=True)
