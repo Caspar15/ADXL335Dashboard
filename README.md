@@ -14,11 +14,6 @@ This project is a comprehensive Sensor Data Monitoring Dashboard built using Das
 - **Real-Time Data Monitoring:** Displays real-time sensor data and triggers alarms if values are out-of-range.
 - **Week Comparison Feature:** Allows users to compare data from different weeks side-by-side.
 
-## Screenshots
-
-![Dashboard Overview](my_dash_app\image\螢幕擷取畫面 2024-07-24 161134.png)
-
-
 ## 🛠️ Installation
 
 1. **Clone the repository:**
