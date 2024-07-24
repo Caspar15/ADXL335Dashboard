@@ -64,7 +64,7 @@ def create_layout():
                 date_picker,
                 html.Button('提交', id='submit-val', n_clicks=0, className="btn btn-primary mb-3"),
                 html.Button('導出數據', id='export-data', n_clicks=0, className="btn btn-secondary mb-3"),
-                html.A('下載數據', id='download-link', download="data.csv", href="", target="_blank", className="mb-3")
+                html.A('下載數據', id='download-link', download="data.csv", href="", target="_blank", className="btn btn-info mb-3")
             ], width=12, className="d-flex justify-content-center")
         ]),
         dcc.Interval(
@@ -78,19 +78,19 @@ def create_layout():
                 dbc.Row([
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("X 軸數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-x', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Y 軸數據", className="bg-success text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-y', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Z 軸數據", className="bg-info text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-z', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("3D XYZ 軸數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-3d-xyz', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-3d-xyz', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12)
                 ]),
             ]),
@@ -98,19 +98,19 @@ def create_layout():
                 dbc.Row([
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Mean Squared Error X", className="bg-warning text-dark text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-mse-x', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-mse-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Mean Squared Error Y", className="bg-danger text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-mse-y', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-mse-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Mean Squared Error Z", className="bg-info text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-mse-z', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-mse-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("3D MSE 數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-3d-mse', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-3d-mse', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12)
                 ]),
             ]),
@@ -118,19 +118,19 @@ def create_layout():
                 dbc.Row([
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Standard Deviation X", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-std-x', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-std-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Standard Deviation Y", className="bg-primary text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-std-y', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-std-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Standard Deviation Z", className="bg-success text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-std-z', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-std-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("3D STD 數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-3d-std', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-3d-std', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12)
                 ]),
             ]),
@@ -138,19 +138,19 @@ def create_layout():
                 dbc.Row([
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Peak Frequency X", className="bg-info text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-peak-x', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-peak-x', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Peak Frequency Y", className="bg-warning text-dark text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-peak-y', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-peak-y', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("Peak Frequency Z", className="bg-danger text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-peak-z', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-peak-z', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12, lg=4),
                     dbc.Col(dbc.Card([
                         dbc.CardHeader("3D Peak Frequency 數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-3d-peak', config={'displayModeBar': False}, className="graph"))
+                        dbc.CardBody(dcc.Graph(id='graph-3d-peak', config={'displayModeBar': False}))
                     ], className="mb-4 shadow-sm"), width=12)
                 ]),
             ]),
@@ -167,7 +167,7 @@ def create_layout():
                                 ],
                                 data=[],
                                 style_table={'height': '300px', 'overflowY': 'auto'},
-                                style_cell={'textAlign': 'left'}
+                                style_cell={'textAlign': 'left'},
                             ),
                             html.Div(id='alarm-output', className='alarm text-center mt-3', style={'display': 'none'})  # 初始設置為隱藏
                         ])
@@ -210,7 +210,7 @@ def create_layout():
                 ]),
                 dbc.Row([
                     dbc.Col([
-                        html.Div(id='combined-plot', className="mb-4 graph")
+                        html.Div(id='combined-plot', className="mb-4")
                     ], width=12)
                 ])
             ])

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a comprehensive Sensor Data Monitoring Dashboard built using Dash and Plotly. The dashboard visualizes various sensor data including XYZ axis data, Mean Squared Error (MSE), Standard Deviation (STD), and Peak Frequency data. It also includes real-time data monitoring and alarm functionality for out-of-range sensor values.
+This project is a comprehensive Sensor Data Monitoring Dashboard built using Dash and Plotly. The dashboard visualizes various sensor data, including XYZ axis data, Mean Squared Error (MSE), Standard Deviation (STD), and Peak Frequency data. It also includes real-time data monitoring and alarm functionality for out-of-range sensor values.
 
 ## Features
 
@@ -14,10 +14,10 @@ This project is a comprehensive Sensor Data Monitoring Dashboard built using Das
 - **Real-Time Data Monitoring:** Displays real-time sensor data and triggers alarms if values are out-of-range.
 - **Week Comparison Feature:** Allows users to compare data from different weeks side-by-side.
 
-# 📊 Sensor Data Monitoring Dashboard
+## Screenshots
 
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-![Dash](https://img.shields.io/badge/dash-2.0.0%2B-brightgreen)
+![Dashboard Overview](C:\Users\caspa\Desktop\Python\my_dash_app\image\螢幕擷取畫面 2024-07-24 161134.png)
+
 
 ## 🛠️ Installation
 
@@ -113,6 +113,71 @@ The application fetches sensor data from a MySQL database. The database schema s
 - **Styling:** Modify the `static/style.css` file to change the appearance of the dashboard.
 - **Data Fetching:** Update `data.py` to modify the data fetching logic or to connect to a different database.
 
+## 🛠️ Deployment
+
+### Docker
+
+1. **Build the Docker image:**
+
+   ```bash
+   docker build -t sensor-dashboard .
+   ```
+
+2. **Run the Docker container:**
+
+   ```bash
+   docker run -p 8050:8050 sensor-dashboard
+   ```
+
+### Kubernetes
+
+Create a Kubernetes deployment file:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-dashboard
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sensor-dashboard
+  template:
+    metadata:
+      labels:
+        app: sensor-dashboard
+    spec:
+      containers:
+      - name: sensor-dashboard
+        image: your-docker-image
+        ports:
+        - containerPort: 8050
+```
+
+Create a Kubernetes service file:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sensor-dashboard
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8050
+  selector:
+    app: sensor-dashboard
+```
+
+Apply the Kubernetes files:
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request with your changes.
@@ -125,3 +190,6 @@ Contributions are welcome! Please open an issue or submit a pull request with yo
 ## 📧 Contact
 
 For questions or feedback, please contact [Caspar15](mailto:caspar9202166422@gmail.com).
+
+---
+
