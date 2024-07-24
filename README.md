@@ -16,7 +16,7 @@ This project is a comprehensive Sensor Data Monitoring Dashboard built using Das
 
 ## Screenshots
 
-![Dashboard Overview](image/螢幕擷取畫面 2024-07-24 161134.png)
+![Dashboard Overview](my_dash_app\image\螢幕擷取畫面 2024-07-24 161134.png)
 
 
 ## 🛠️ Installation
