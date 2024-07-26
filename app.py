@@ -11,6 +11,11 @@ from dash import dcc, html
 import urllib.parse
 import base64
 import flask
+import logging
+
+# 設置日誌記錄
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # 初始化應用
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX])
@@ -51,11 +56,11 @@ def update_output(n_intervals, start_date, end_date, n_clicks, state_start_date,
     df_stats = fetch_filtered_data(state_start_date, state_end_date, 'StatisticsData')
 
     if df_accel.empty or df_stats.empty:
-        print("No data available for the selected date range")
+        logger.warning("No data available for the selected date range")
         raise PreventUpdate
 
-    print("df_accel columns:", df_accel.columns)  # 調試輸出
-    print("df_stats columns:", df_stats.columns)  # 調試輸出
+    logger.info("df_accel columns: %s", df_accel.columns)
+    logger.info("df_stats columns: %s", df_stats.columns)
 
     # 繪製時間序列數據
     time_series_x = plot_time_series(df_accel, 'RECORDED_TIME', 'XOUT', 'Time Series Data for XOUT')
@@ -124,7 +129,7 @@ def update_week_options(n_clicks, start_date, end_date):
     df_accel = fetch_filtered_data(start_date, end_date, 'AccelerometerData')
 
     if df_accel.empty:
-        print(f"No data available for the selected date range: {start_date} to {end_date}")
+        logger.warning(f"No data available for the selected date range: {start_date} to {end_date}")
         return [], []
 
     df_accel['WEEK'] = df_accel['RECORDED_TIME'].dt.to_period('W').apply(lambda r: r.start_time)
@@ -156,7 +161,7 @@ def update_combined_plot(selected_weeks, selected_data_type, start_date, end_dat
             df_week = fetch_filtered_data(start_of_week, end_of_week, 'StatisticsData')
         df_week['WEEK'] = week
 
-        print(f"Week: {week}, Columns: {df_week.columns}")  # 調試輸出
+        logger.info(f"Week: {week}, Columns: {df_week.columns}")
 
         plot_title = f"{selected_data_type} for Week {week}"
         plot = create_combined_plot(df_week, 'RECORDED_TIME', [selected_data_type], plot_title)

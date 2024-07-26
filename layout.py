@@ -3,6 +3,12 @@ from dash import dcc, html
 from datetime import date
 from dash import dash_table
 
+def create_card(header, graph_id, color):
+    return dbc.Card([
+        dbc.CardHeader(header, className=f"bg-{color} text-white text-center"),
+        dbc.CardBody(dcc.Graph(id=graph_id, config={'displayModeBar': False}, className="fade-in"))
+    ], className="mb-4 shadow-sm")
+
 def create_layout():
     navbar = dbc.Navbar(
         dbc.Container(
@@ -76,82 +82,34 @@ def create_layout():
         dcc.Tabs(id="tabs", children=[
             dcc.Tab(label='XYZ 數據', children=[
                 dbc.Row([
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("X 軸數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-x', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Y 軸數據", className="bg-success text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-y', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Z 軸數據", className="bg-info text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-z', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D XYZ 軸數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-3d-xyz', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12)
+                    dbc.Col(create_card("X 軸數據", 'graph-x', "dark"), width=12, lg=4),
+                    dbc.Col(create_card("Y 軸數據", 'graph-y', "success"), width=12, lg=4),
+                    dbc.Col(create_card("Z 軸數據", 'graph-z', "info"), width=12, lg=4),
+                    dbc.Col(create_card("3D XYZ 軸數據", 'graph-3d-xyz', "dark"), width=12)
                 ]),
             ]),
             dcc.Tab(label='MSE 數據', children=[
                 dbc.Row([
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Mean Squared Error X", className="bg-warning text-dark text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-mse-x', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Mean Squared Error Y", className="bg-danger text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-mse-y', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Mean Squared Error Z", className="bg-info text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-mse-z', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D MSE 數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-3d-mse', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12)
+                    dbc.Col(create_card("Mean Squared Error X", 'graph-mse-x', "warning"), width=12, lg=4),
+                    dbc.Col(create_card("Mean Squared Error Y", 'graph-mse-y', "danger"), width=12, lg=4),
+                    dbc.Col(create_card("Mean Squared Error Z", 'graph-mse-z', "info"), width=12, lg=4),
+                    dbc.Col(create_card("3D MSE 數據", 'graph-3d-mse', "dark"), width=12)
                 ]),
             ]),
             dcc.Tab(label='STD 數據', children=[
                 dbc.Row([
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Standard Deviation X", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-std-x', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Standard Deviation Y", className="bg-primary text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-std-y', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Standard Deviation Z", className="bg-success text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-std-z', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D STD 數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-3d-std', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12)
+                    dbc.Col(create_card("Standard Deviation X", 'graph-std-x', "dark"), width=12, lg=4),
+                    dbc.Col(create_card("Standard Deviation Y", 'graph-std-y', "primary"), width=12, lg=4),
+                    dbc.Col(create_card("Standard Deviation Z", 'graph-std-z', "success"), width=12, lg=4),
+                    dbc.Col(create_card("3D STD 數據", 'graph-3d-std', "dark"), width=12)
                 ]),
             ]),
             dcc.Tab(label='峰值頻率數據', children=[
                 dbc.Row([
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Peak Frequency X", className="bg-info text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-peak-x', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Peak Frequency Y", className="bg-warning text-dark text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-peak-y', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("Peak Frequency Z", className="bg-danger text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-peak-z', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12, lg=4),
-                    dbc.Col(dbc.Card([
-                        dbc.CardHeader("3D Peak Frequency 數據", className="bg-dark text-white text-center"),
-                        dbc.CardBody(dcc.Graph(id='graph-3d-peak', config={'displayModeBar': False}, className="fade-in"))
-                    ], className="mb-4 shadow-sm"), width=12)
+                    dbc.Col(create_card("Peak Frequency X", 'graph-peak-x', "info"), width=12, lg=4),
+                    dbc.Col(create_card("Peak Frequency Y", 'graph-peak-y', "warning"), width=12, lg=4),
+                    dbc.Col(create_card("Peak Frequency Z", 'graph-peak-z', "danger"), width=12, lg=4),
+                    dbc.Col(create_card("3D Peak Frequency 數據", 'graph-3d-peak', "dark"), width=12)
                 ]),
             ]),
             dcc.Tab(label='實時數據', children=[
