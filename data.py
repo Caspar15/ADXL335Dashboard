@@ -19,6 +19,7 @@ def fetch_data(query):
 
     return df
 
+# 抓取欄位，週數部分
 def fetch_filtered_data(start_date, end_date, table_name):
     query = f"SELECT * FROM {table_name} WHERE RECORDED_TIME BETWEEN '{start_date}' AND '{end_date}' ORDER BY RECORDED_TIME DESC"
     df = fetch_data(query)

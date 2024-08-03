@@ -17,12 +17,14 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# 初始化應用
+# 初始化應用，伺服器啟動
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX])
 server = app.server
 
+# layout 的部分
 app.layout = create_layout()
 
+# 回調函數
 @app.callback(
     [Output('graph-x', 'figure'),
      Output('graph-y', 'figure'),
@@ -88,7 +90,7 @@ def update_output(n_intervals, start_date, end_date, n_clicks, state_start_date,
     plot3d_std = plot_3d_surface(df_stats, 'STD_X', 'STD_Y', 'STD_Z', '3D Scatter Plot for STD Data')
     plot3d_peak = plot_3d_surface(df_stats, 'PEAK_FREQ_X', 'PEAK_FREQ_Y', 'PEAK_FREQ_Z', '3D Scatter Plot for Peak Frequency Data')
 
-    # 顯示實時數據
+    # 顯示實時數據，避免空值
     real_time_data = [
         {"parameter": "XOUT", "value": df_accel['XOUT'].iloc[0] if not df_accel.empty else 'N/A'},
         {"parameter": "YOUT", "value": df_accel['YOUT'].iloc[0] if not df_accel.empty else 'N/A'},
